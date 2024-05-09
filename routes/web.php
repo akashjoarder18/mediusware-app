@@ -12,7 +12,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\{UserController,AuthController};
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/',[UserController::class,'register'])->name('users.register');
+Route::post('/users',[UserController::class,'store'])->name('users.store');
+Route::get('/login',[AuthController::class,'getLogin'])->name('getLogin');
+Route::post('/login',[AuthController::class,'postLogin'])->name('postLogin');
+
+// after login user can access
+Route::group(['middleware'=>['user_auth']],function(){
+    // users profile
+    Route::get('/logout',[UserController::class,'logout'])->name('logout');
+    Route::get('/dashboard',[UserController::class,'dashboard'])->name('dashboard');
+    Route::get('/users/{id}',[UserController::class,'index'])->name('users.index');
+    
 });
