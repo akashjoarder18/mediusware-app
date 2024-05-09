@@ -8,6 +8,13 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    // get all transection
+    public function index(){        
+        $title = 'Users informations';
+        $user = User::get()->where('id',auth()->user()->id);
+        $data= compact('title','user');
+        return view('users.index')->with($data);
+    }
     // User register
     public function register(){      
         $title = 'Users Register';

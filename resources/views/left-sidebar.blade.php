@@ -13,7 +13,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('admin-assets/dist/img/sayed.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('admin-assets/dist/img/joarder.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">
@@ -81,6 +81,24 @@
                 <a href="{{route('get.deposit.show')}}" class="nav-link {{$current_route=='get.deposit.show'?'active':''}}">
                   <i class="far fas fa-user"></i>
                   <p>Deposit</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item {{$current_route=='get.withdrawal.show'?'menu-open':''}}">
+            <a href="#" class="nav-link {{$current_route=='get.withdrawal.show'?'active':''}}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Withdrawal Transection
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('get.withdrawal.show')}}" class="nav-link {{$current_route=='get.withdrawal.show'?'active':''}}">
+                  <i class="far fas fa-user"></i>
+                  <p>Withdrawal</p>
                 </a>
               </li>
 

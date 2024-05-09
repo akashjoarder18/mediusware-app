@@ -41,6 +41,10 @@ class TransectionController extends Controller
             ]
         );
 
+        $userAccount  =  auth()->user();
+        $userAccount->balance = $userAccount->balance + $data['amount'];
+        $userAccount->save();
+
         $deposite = new Transection;
         $deposite->amount = $data['amount'];
         $deposite->user_id = auth()->user()->id;
@@ -49,16 +53,60 @@ class TransectionController extends Controller
         $deposite->date = date('Y-m-d');
         $deposite->save();
 
-        return redirect()->route('getLogin');
+        return redirect()->route('get.deposit.show');
 
     }
 
-     // user deshborard
-     public function dashboard(){
-        $data=[
-            'title'=>'Dashboard'
-        ];
-        return view('dashboard',$data);
+
+    // get all transection
+    public function getWithdrawal(){        
+        $title = 'Users Withdrawal Transections';
+        $transection = Transection::get()->where('transection_type','withdrawal')->where('user_id',auth()->user()->id);
+        $data= compact('title','transection');
+        return view('withdrawal.index')->with($data);
+    }
+
+    // User Withdrawal Transection
+    public function withdrawal(){      
+        $title = 'Users Withdrawal Form';
+        $data= compact('title');
+        return view('withdrawal.create')->with($data);
+    }
+
+    // user store
+    public function storeWithdrawal(Request $request){
+        $data = $request->all();
+        $rate = 0;
+        $request->validate(
+            [
+                'amount'=>'required|integer',
+            ]
+        );
+
+        if(auth()->user()->account_type == 'Individual'){
+            $rate = (0.015 / 100)*$data['amount'];
+            if(date("l") == "Friday"){
+                $rate = 0;
+            }
+        }elseif(auth()->user()->account_type == 'Business'){
+            $rate = (0.025 / 100)*$data['amount'];
+        }
+
+        $withdrawalAmount = $data['amount']+$rate;
+        $userAccount  =  auth()->user();
+        $userAccount->balance = $userAccount->balance - $withdrawalAmount;
+        $userAccount->save();
+
+        $deposite = new Transection;
+        $deposite->amount = $data['amount'];
+        $deposite->user_id = auth()->user()->id;
+        $deposite->transection_type = 'withdrawal';
+        $deposite->fee = $rate;
+        $deposite->date = date('Y-m-d');
+        $deposite->save();
+
+        return redirect()->route('get.withdrawal.show');
+
     }
 
    

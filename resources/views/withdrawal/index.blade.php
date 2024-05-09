@@ -5,12 +5,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">User banking deposit transections</h1>
+        <h1 class="m-0">User banking withdrawal transections</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-          <li class="breadcrumb-item active">Deposit Transections</li>
+          <li class="breadcrumb-item active">Withdrawal Transections</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -24,11 +24,11 @@
     	<div class="container-fluid">
       <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Users Banking Deposit Transections</h3>
+                <h3 class="card-title">Users Banking Withdrawal Transections</h3>
                 <a href="{{route('users.index', ['id' => auth()->user()->id])}}"><span class="ml-5"> {{auth()->user()->name}} </span>
                 </a>
-                <a href="{{route('get.deposit')}}">
-                  <button class="btn btn-primary d-inline-block m-2 float-right"> Add Deposit  </button>
+                <a href="{{route('get.withdrawal')}}">
+                  <button class="btn btn-primary d-inline-block m-2 float-right"> Add Withdrawal </button>
                 </a>
               </div>
               <!-- /.card-header -->

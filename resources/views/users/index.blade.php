@@ -1,4 +1,4 @@
-@extends('admin.main-layout')
+@extends('main-layout')
 
 @section('content-header')
 <div class="content-header">
@@ -37,48 +37,26 @@
                       <!--<th style="width: 10px">#</th>-->
                       <th>Name</th>
                       <th>Email</th>
-                      <th>Role</th>
-                      <th>Gender</th>
-                      <th>Address</th>
-                      <th>Status</th>
-                      <th style="width: 40px">Action</th>
+                      <th>account_type</th>
+                      <th>Balance</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($users as $user)
+                    @foreach($user as $info)
                     <tr>
                       <!--<td>1.</td>-->
-                      <td>{{$user->name}}</td>
-                      <td>{{$user->email}}</td>
+                      <td>{{$info->name}}</td>
+                      <td>{{$info->email}}</td>
+                      
                       <td>
-                          @if($user->role == 1)
-                            B2B
-                          @elseif($user->role == 2)
-                            B2C
-                          @else
-                            Customer User
+                          @if($info->account_type == "Individual")
+                          Individual
+                          @elseif($info->account_type == "Business")
+                          Individual
                           @endif
                       </td>
-                      <td>
-                          @if($user->gender == "M")
-                            Male
-                          @elseif($user->gender == "F")
-                            Female
-                          @else
-                            Other
-                          @endif
-                      </td>
-                      <td>{{$user->address}}</td>
-                      <td>
-                          @if($user->status == "1")
-                           <span class="badge badge-success"> active </span>
-                          @else
-                          <span class="badge badge-danger"> inactive </span>
-                          @endif</td>
-                      <td>
-                        <a href="{{route('users.delete', ['id' => $user->id])}}"><button class="btn btn-danger">delete</button></a>
-                        <a href="{{route('users.edit', ['id' => $user->id])}}"><button class="btn btn-primary">edit</button></a>
-                      </td>
+                      <td>{{$info->balance}}</td>
+                      
                     </tr>
                     @endforeach
                     
