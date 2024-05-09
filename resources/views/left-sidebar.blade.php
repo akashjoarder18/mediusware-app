@@ -16,7 +16,11 @@
           <img src="{{asset('admin-assets/dist/img/sayed.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"></a>
+          <a href="#" class="d-block">
+            @if(isset(auth()->user()->name))
+            {{auth()->user()->name}}
+            @endif
+          </a>
         </div>
       </div>
 
@@ -46,7 +50,42 @@
               </p>
             </a>
           </li>
-        
+          <li class="nav-item {{$current_route=='transection.index'?'menu-open':''}}">
+            <a href="#" class="nav-link {{$current_route=='transection.index'?'active':''}}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Transection Management
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('transection.index')}}" class="nav-link {{$current_route=='transection.index'?'active':''}}">
+                  <i class="far fas fa-user"></i>
+                  <p>Transections</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item {{$current_route=='get.deposit.show'?'menu-open':''}}">
+            <a href="#" class="nav-link {{$current_route=='get.deposit.show'?'active':''}}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Deposit Transection
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('get.deposit.show')}}" class="nav-link {{$current_route=='get.deposit.show'?'active':''}}">
+                  <i class="far fas fa-user"></i>
+                  <p>Deposit</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
 
         </ul>
       </nav>

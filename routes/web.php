@@ -27,6 +27,7 @@ Route::group(['middleware'=>['user_auth']],function(){
     Route::get('/dashboard',[UserController::class,'dashboard'])->name('dashboard');
     Route::get('/users/{id}',[UserController::class,'index'])->name('users.index');
     Route::get('/transection',[TransectionController::class,'index'])->name('transection.index');
+    Route::get('/deposit-show',[TransectionController::class,'getDeposit'])->name('get.deposit.show');
     Route::get('/deposit',[TransectionController::class,'deposit'])->name('get.deposit');
     Route::post('/deposit',[TransectionController::class,'store'])->name('post.deposit');
     

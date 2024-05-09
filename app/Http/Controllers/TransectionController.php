@@ -12,11 +12,20 @@ class TransectionController extends Controller
     // get all transection
     public function index(){        
         $title = 'Users all transections';
-        $transection = Transection::all();
+        $transection = Transection::get()->where('user_id',auth()->user()->id);
         $data= compact('title','transection');
         return view('transection.index')->with($data);
     }
-    // User register
+
+    // get all transection
+    public function getDeposit(){        
+        $title = 'Users Deposit transections';
+        $transection = Transection::get()->where('transection_type','deposit')->where('user_id',auth()->user()->id);
+        $data= compact('title','transection');
+        return view('deposit.index')->with($data);
+    }
+
+    // User Deposit Transection
     public function deposit(){      
         $title = 'Users Deposit Form';
         $data= compact('title');
