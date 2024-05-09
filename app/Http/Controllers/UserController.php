@@ -56,5 +56,11 @@ class UserController extends Controller
         return view('dashboard',$data);
     }
 
+     // user logout
+     public function logout(){
+        auth()->logout();
+        return redirect()->route('getLogin')->with('success','You have been successfully logged out');
+    }
+
    
 }
